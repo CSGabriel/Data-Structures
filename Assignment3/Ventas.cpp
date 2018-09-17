@@ -4,21 +4,14 @@ using namespace std;
 
 Ventas::Ventas(){
   numProductos = 0;
-  numDias = 0;
   nombreDeVendedor = " ";
   nombreDeProducto = " ";
 }
 
-Ventas::~Ventas(){
-  cout << "Objetos de la clase venta han sido destruidos!" << endl;
-}
+Ventas::~Ventas(){}
 
 void Ventas::setProductos(int n){
   numProductos  = n;
-}
-
-void Ventas::setDias(int n){
-  numDias = n;
 }
 
 void Ventas::setNameForVendor(string name){
@@ -31,10 +24,6 @@ void Ventas::setNameForProduct(string name){
 
 int Ventas::getProductos(){
   return numProductos;
-}
-
-int Ventas::getDias(){
-  return numDias;
 }
 
 string Ventas::getNameForVendor(){
