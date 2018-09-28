@@ -234,12 +234,15 @@ void Lista::game(){
     do {
       cout << "Player: " << show->playerNum << ", " << show->nombre << endl;
       if(once == 0){
-        cout << "Enter a word: ";
+        cout << "Enter a word (If the first person enters more than 2 words, it will be reduced to one): ";
         if(count == 0){
           cin.ignore();
           count++;
         }
-        getline(cin, show->palabra);
+        string discard;
+        getline(cin,show->palabra,' ');
+        getline(cin,discard);
+
         system("clear");
         sentence[iterate]= show->palabra;
         before = show;
@@ -251,7 +254,7 @@ void Lista::game(){
         for(int i = 0; i < iterate;i++){
           cout << "Enter the previous player words: ";
           string word;
-          cin >> word;
+          getline(cin,word);
           if(word == sentence[i]){
             veredict =true;
           }
@@ -262,13 +265,25 @@ void Lista::game(){
         }
         if(veredict == true){
           cout << "You passed the condition!" << endl;
-          cout << "Now Enter Your Word: ";
+          cout << "Now Enter Your Word (You can only add one word): ";
+          string discard = "something";
           cin >> show->palabra;
-          system("clear");
-          sentence[iterate]= show->palabra;
-          before = show;
-          show = show->next;
-          iterate++;
+          getline(cin,discard);
+          if(discard[0] == ' '){
+            int path = show->playerNum;
+            system("clear");
+            deletePlayer(path);
+            keepTrack--;
+            show = before->next;
+
+          }
+          else{
+            system("clear");
+            sentence[iterate]= show->palabra;
+            before = show;
+            show = show->next;
+            iterate++;
+          }
         }
         else if(veredict == false){
           int path = show->playerNum;
